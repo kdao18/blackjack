@@ -35,8 +35,20 @@ void Deck::reset(){
 }
 
 void shuffle(){
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(Cards.begin(), Cards.end(), g); // <-- ? im getting an error for the first Card
+    random_device rd;
+    mt19937 g(rd());    
+    shuffle(Cards.begin(), Cards.end(), g); // <-- ? im getting an error for the first Card
 }
 
+Card deal_card(){
+    if(!Cards.empty()){
+        Card deal = Cards.back(); 
+        Cards.push_back(); 
+
+        return deal; 
+    }
+}
+
+int getDeckSize(){
+    return Cards.size(); 
+}
