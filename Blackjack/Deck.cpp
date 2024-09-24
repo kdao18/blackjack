@@ -34,13 +34,13 @@ void Deck::reset(){
     shuffle(); 
 }
 
-void shuffle(){
+void Deck::shuffle(){
     random_device rd;
     mt19937 g(rd());    
     shuffle(Cards.begin(), Cards.end(), g); // <-- ? im getting an error for the first Card
 }
 
-Card deal_card(){
+Card Deck::deal_card(){
     if(!Cards.empty()){
         Card deal = Cards.back(); 
         Cards.push_back(); 
@@ -49,8 +49,6 @@ Card deal_card(){
     }
 }
 
-int getDeckSize(){
+int Deck::getDeckSize(){
     return Cards.size(); 
 }
-
-//hi
