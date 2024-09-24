@@ -25,8 +25,6 @@ public:
 
     void stand();
 
-    int getHandValue() const;
-
     // Get the total value of the player's hand
     int getHandValue() const;
 
