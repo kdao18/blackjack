@@ -11,8 +11,13 @@
 
 int main() {
     std::cout << "Welcome to Blackjack!\n";
-    
+    // main loop is while(!isBusted)
+    // in main loop, when isBusted is true call adjust for aces
+    // create while loop for the adjust aces for when isbusted is true
     return 0;
 }
+
+
+
 
 
