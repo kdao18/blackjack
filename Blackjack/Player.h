@@ -26,10 +26,10 @@ public:
     void stand();
 
     // Get the total value of the player's hand
-    int getHandValue() const;
+    int getHandValue(const Card& initial_Hand);
 
     // Check if the player has busted (hand value > 21)
-    bool isBusted() const;
+    void Busted(const Card& initial_Hand);
 
     // Clear the player's hand (for starting a new round)
     void clearHand();
@@ -40,8 +40,10 @@ public:
 private:
     vector<Card> Hand;
 
-    int totalScore;
+    int total_score = 0;
     int aceCount;
+
+    bool isBusted = false;
 
     void adjustForAces();
 };
