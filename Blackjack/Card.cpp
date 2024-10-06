@@ -9,8 +9,7 @@
 #include <iostream>
 
 #include "Card.h"
-
-
+using namespace std;
 
 Card::Card(Rank r, Suit s)
 {
@@ -29,14 +28,17 @@ Card::Card(Rank r, Suit s)
         value = 11;
     }
 }
-Suit Card::getSuit() const
+
+Card::Suit Card::getSuit() const
 {
     return suit;
 }
-Rank Card::getRank() const
+
+Card::Rank Card::getRank() const
 {
     return rank;
 }
+
 int Card::getValue() const
 {
     return value;
@@ -74,4 +76,3 @@ string Card::toString() const
 
     return rankStr + " of " + suitStr;
 }
-
