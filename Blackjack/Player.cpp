@@ -13,60 +13,66 @@
 #include "Deck.h"
 #include "Card.h"
 
-using namespace std; 
+using namespace std;
 
-Player::Player(){
-    vector<Card> Hand; 
-    totalScore = 0; 
-    aceCount = 0; 
+Player::Player() {
+    vector<Card> Hand;
+    
+    aceCount = 0;
 }
 
-void Player::hit(const Card& card){
-    Hand.push_back(card); 
+void Player::hit(const Card& card) {
+    Hand.push_back(card);
 }
 
-void Player::stand(){
-    bool isStanding = true; 
+void Player::stand() {
+    bool isStanding = true;
 }
 
-int Player::getHandValue() const {
-    for(int i = 0; i < Hand.size(); i++){
-        int totalScore = Hand.getRank();  //<-- i want to be able to use getRank form Card.h so that I can see the value of each card
+int Player::getHandValue(const Card& initial_Hand)  {
+    int total_score = 0;
+    for(int i = 0; i < Hand.size(); i++) {
+        total_score = total_score + static_cast<int>(initial_Hand.getRank());  //<-- i want to be able to use getRank form Card.h so that I can see the value of each 
+        if (static_cast<int>(initial_Hand.getRank()) == 11)
+        {
+            aceCount++;
+        }
     }
-
-    return totalScore; 
+    
+    return total_score;
 }
 
-bool Player::isBusted() const{
-    int score = getHandValue();
+void Player::Busted(const Card& initial_Hand){
+    int score = getHandValue(initial_Hand);
 
-    if(score > 21){
-        return true; 
-    }else{
-        return false; 
+    if (score > 21) {
+        isBusted = true;
+    }
+    else {
+        isBusted = false;
     }
 }
 
-void Player::clearHand(){
-    Hand.clear(); 
-    totalScore = 0; 
-    aceCount = 0; 
+void Player::clearHand() {
+    Hand.clear();
+    total_score = 0;
+    aceCount = 0;
 
-    bool isStanding = false; 
+    bool isStanding = false;
 }
 
-string Player::showHand() const{
+string Player::showHand() const {
     std::ostringstream oss;
     for (const auto& card : Hand) {
         oss << card.toString() << "\n";
     }
-    oss << "Total value: " << totalScore;
+    oss << "Total value: " << total_score;
     return oss.str();
 }
 
-void Player::adjustForAces(){
-    while (totalScore > 21 && aceCount > 0) {
-        totalScore -= 10;  // Count the Ace as 1 instead of 11
+void Player::adjustForAces() {
+    while (total_score > 21 && aceCount > 0) {
+        total_score -= 10;  // Count the Ace as 1 instead of 11
         aceCount--;
     }
 }
