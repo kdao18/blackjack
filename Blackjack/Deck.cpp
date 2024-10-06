@@ -43,7 +43,7 @@ void Deck::shuffle(){
 Card Deck::deal_card(){
     if(!Cards.empty()){
         Card deal = Cards.back(); 
-        Cards.push_back(); 
+        Cards.pop_back(); 
 
         return deal; 
     }
