@@ -5,7 +5,6 @@
     Project: Blackjack
     9/22/2024
 */
-
 #include <random>
 #include <algorithm>
 #include <vector>
@@ -13,42 +12,51 @@
 #include "Deck.h"
 #include "Card.h"
 
+
 using namespace std;
 
 //constructor of the deck of cards
-Deck::Deck(){
-    reset(); 
-}
-
-// recreating the deck of cards
-void Deck::reset(){
-    Cards.clear(); 
-
-    const char Suits[] {'H', 'D', 'S', 'C'}; 
-    for (int Rank = 2; Rank <= 14; Rank++){
-        for(char Suit : Suits){
-            Cards.push_back(Card(Rank, Suit)); // <-- ? im getting an error for the second Card
+Deck::Deck() {
+    for (int suit_value = 1; suit_value <= 4; ++suit_value) {
+        Card::Suit suit = static_cast<Card::Suit>(suit_value);  // Cast int to Suit enum
+        for (int rank_value = 1; rank_value <= 13; ++rank_value) {
+            Card::Rank rank = static_cast<Card::Rank>(rank_value);  // Cast int to Rank enum
+            Cards.push_back(Card(rank, suit));
         }
     }
 
-    shuffle(); 
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::shuffle(Cards.begin(), Cards.end(), generator);
 }
 
-void Deck::shuffle(){
-    random_device rd;
-    mt19937 g(rd());    
-    shuffle(Cards.begin(), Cards.end(), g); // <-- ? im getting an error for the first Card
+// recreating the deck of cards
+void Deck::reset() {
+    Cards.clear();
+    
+    for (int suit_value = 1; suit_value <= 4; ++suit_value) {
+        Card::Suit suit = static_cast<Card::Suit>(suit_value);  // Cast int to Suit enum
+        for (int rank_value = 1; rank_value <= 13; ++rank_value) {
+            Card::Rank rank = static_cast<Card::Rank>(rank_value);  // Cast int to Rank enum
+            Cards.push_back(Card(rank, suit));
+        }
+    }
+
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::shuffle(Cards.begin(), Cards.end(), generator);
+    
 }
 
-Card Deck::deal_card(){
-    if(!Cards.empty()){
-        Card deal = Cards.back(); 
-        Cards.pop_back(); 
+Card Deck::deal_card() {
+    if (!Cards.empty()) {
+        Card deal = Cards.back();
+        Cards.pop_back();
 
-        return deal; 
+        return deal;
     }
 }
 
-int Deck::getDeckSize(){
-    return Cards.size(); 
+int Deck::getDeckSize() {
+    return Cards.size();
 }
