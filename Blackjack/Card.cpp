@@ -15,7 +15,7 @@ Card::Card(Rank r, Suit s)
 {
     rank = r;
     suit = s;
-    if (r >= Rank::Ace and r <= Rank::Ten)
+    if (r >= Rank::Two and r <= Rank::Ten)
     {
         value = static_cast<int>(r);
     }
@@ -76,3 +76,4 @@ string Card::toString() const
 
     return rankStr + " of " + suitStr;
 }
+
