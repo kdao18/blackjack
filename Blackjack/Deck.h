@@ -12,27 +12,28 @@
 
 #include "Card.h"
 
+
 #ifndef DECK_H
 #define DECK_H
 
-using namespace std; 
+using namespace std;
 
-class Deck{
-    public:
+class Deck {
+public:
 
-    Deck(); 
+    Deck();
 
     //functions
-    void shuffle();  // shuffles the deck of cards in the vector into a random order
     Card deal_card(); // deals the card to the house and the player from the vector, takes the cards out of the vector 
     void reset();  // recreates the missing cards into the deck 
     int getDeckSize(); // returns the size of the deck (number of remaining cards)
 
-    private:
+private:
 
-    vector<Card> Cards; 
+    vector<Card> Cards;
+    
 
-}; 
+};
 
 
 #endif 
