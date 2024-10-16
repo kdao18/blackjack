@@ -9,7 +9,7 @@
 #include <string>
 #include <sstream>
 
-#include "player.h"
+#include "Player.h"
 #include "Deck.h"
 #include "Card.h"
 
@@ -29,11 +29,11 @@ void Player::stand() {
     bool isStanding = true;
 }
 
-int Player::getHandValue(const Card& initial_Hand)  {
+int Player::getHandValue()  {
     int total_score = 0;
     for(int i = 0; i < Hand.size(); i++) {
-        total_score = total_score + static_cast<int>(initial_Hand.getRank());  //<-- i want to be able to use getRank form Card.h so that I can see the value of each 
-        if (static_cast<int>(initial_Hand.getRank()) == 11)
+        total_score = total_score + static_cast<int>(Hand[i].getRank());  //<-- I changed this from initial_hand(what we had inside the parameters to Hand[i])
+        if (static_cast<int>(Hand[i].getRank()) == 11)
         {
             aceCount++;
         }
@@ -42,14 +42,14 @@ int Player::getHandValue(const Card& initial_Hand)  {
     return total_score;
 }
 
-void Player::Busted(const Card& initial_Hand){
-    int score = getHandValue(initial_Hand);
+bool Player::Busted(){ //erased the parameters also now returns true/false
+    int score = getHandValue(); //erased the parameters
 
     if (score > 21) {
-        isBusted = true;
+        return true; 
     }
     else {
-        isBusted = false;
+        return false; 
     }
 }
 
